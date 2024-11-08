@@ -1,14 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
+using MouseApi.Models;
 
 namespace MouseApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public class MouseController : ControllerBase
 {
     [HttpGet(Name = "GetMouses")]
-    public IEnumerable<WeatherForecast> Get()
+    public IEnumerable<MouseItem> Get()
     {
-       
+       return [
+           new() {
+                Id = 0,
+                Name = "Roberta",
+                IsComplete = true 
+           } 
+       ];
     }
 }
