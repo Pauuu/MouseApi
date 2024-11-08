@@ -1,0 +1,6 @@
+@MouseApi_HostAddress = http://localhost:5071
+
+GET {{MouseApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
