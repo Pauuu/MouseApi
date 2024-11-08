@@ -1,3 +1,4 @@
+using Data.MouseApiContext;
 using Microsoft.AspNetCore.Mvc;
 using MouseApi.Models;
 
@@ -7,15 +8,16 @@ namespace MouseApi.Controllers;
 [Route("[controller]")]
 public class MouseController : ControllerBase
 {
+    private readonly MouseDbContext _MouseDbContext;
+
+    public MouseController(MouseDbContext mouseDbContext)
+    {
+        _MouseDbContext = mouseDbContext;
+    }
+
     [HttpGet(Name = "GetMouses")]
     public IEnumerable<MouseItem> Get()
     {
-       return [
-           new() {
-                Id = 0,
-                Name = "Roberta",
-                IsComplete = true 
-           } 
-       ];
+        return _MouseDbContext.MouseItems.ToArray();
     }
 }

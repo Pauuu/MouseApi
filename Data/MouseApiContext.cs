@@ -3,10 +3,10 @@ using MouseApi.Models;
 
 namespace Data.MouseApiContext
 {
-    public class MouseApiContext : DbContext
+    public class MouseDbContext : DbContext
     {
-        public MouseApiContext(DbContextOptions<MouseApiContext> options) : base(options) { }
+        public MouseDbContext(DbContextOptions<MouseDbContext> options) : base(options) { }
 
-        public DbSet<MouseItem> TodoItems { get; set; }
+        public DbSet<MouseItem> MouseItems { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MouseApi.Migrations
 {
-    [DbContext(typeof(MouseApiContext))]
+    [DbContext(typeof(MouseDbContext))]
     partial class MouseApiContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

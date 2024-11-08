@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MouseApi.Migrations
 {
-    [DbContext(typeof(MouseApiContext))]
+    [DbContext(typeof(MouseDbContext))]
     [Migration("20241108210533_InitialCreate")]
     partial class InitialCreate
     {
