@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MouseApi.Migrations
 {
     [DbContext(typeof(MouseDbContext))]
-    [Migration("20241108210533_InitialCreate")]
+    [Migration("20241108231415_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -34,7 +34,7 @@ namespace MouseApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TodoItems");
+                    b.ToTable("MouseItems");
                 });
 #pragma warning restore 612, 618
         }

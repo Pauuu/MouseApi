@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MouseApi.Migrations
 {
     [DbContext(typeof(MouseDbContext))]
-    partial class MouseApiContextModelSnapshot : ModelSnapshot
+    partial class MouseDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -31,7 +31,7 @@ namespace MouseApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TodoItems");
+                    b.ToTable("MouseItems");
                 });
 #pragma warning restore 612, 618
         }
