@@ -1,23 +1,39 @@
 using Data.MouseApiContext;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MouseApi.Models;
 
 namespace MouseApi.Controllers;
 
+// Probar con los métodos async. Poner algún sleep para probarlo o algo
 [ApiController]
-[Route("[controller]")]
-public class MouseController : ControllerBase
+[Route("[controller]/[route]")]
+public class MouseController(MouseDbContext mouseDbContext) : ControllerBase
 {
-    private readonly MouseDbContext _MouseDbContext;
-
-    public MouseController(MouseDbContext mouseDbContext)
-    {
-        _MouseDbContext = mouseDbContext;
-    }
+    // Constructor primario
+    private readonly MouseDbContext _MouseDbContext = mouseDbContext;
 
     [HttpGet(Name = "GetMouses")]
-    public IEnumerable<MouseItem> Get()
+    public async Task<IEnumerable<MouseItem>> GetMouses()
     {
-        return _MouseDbContext.MouseItems.ToArray();
+        // TODO: revisar qeu hace esto exactamente. Evita un null reference?
+        return await _MouseDbContext.MouseItems.ToListAsync();
+    }
+
+    [HttpPost(Name = "AddMousee")]
+    public async Task<ActionResult<MouseItem>> AddMouse(MouseItem mouseItem)
+    {
+        // _MouseDbContext.MouseItems.Add(new(){
+        //     Name = name,
+        //     IsComplete = isComplete
+        // });
+        
+        _MouseDbContext.MouseItems.Add(mouseItem);
+
+        await _MouseDbContext.SaveChangesAsync();
+
+        return Ok();
+
+        // return CreatedAtAction(nameof(GetMouses), new { id = 23 }, null);
     }
 }
