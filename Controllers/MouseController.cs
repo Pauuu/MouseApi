@@ -23,16 +23,11 @@ public class MouseController(MouseDbContext mouseDbContext) : ControllerBase
     [HttpPost(Name = "AddMousee")]
     public async Task<ActionResult<MouseItem>> AddMouse(MouseItem mouseItem)
     {
-        // _MouseDbContext.MouseItems.Add(new(){
-        //     Name = name,
-        //     IsComplete = isComplete
-        // });
-        
         _MouseDbContext.MouseItems.Add(mouseItem);
 
         await _MouseDbContext.SaveChangesAsync();
 
-        return Ok();
+        return CreatedAtAction(nameof(AddMouse), new { id = mouseItem.Id }, mouseItem);
 
         // return CreatedAtAction(nameof(GetMouses), new { id = 23 }, null);
     }

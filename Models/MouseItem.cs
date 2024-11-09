@@ -8,4 +8,10 @@ namespace MouseApi.Models
         public bool IsComplete { get; set; }
     }
 
+    public class MouseDebts
+    {
+        public required MouseItem Debtor { get; set; }
+        public required MouseItem Creditor { get; set; }
+        public decimal Value { get; set;}
+    }
 }

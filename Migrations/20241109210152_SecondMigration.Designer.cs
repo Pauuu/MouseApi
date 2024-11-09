@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MouseApi.Migrations
 {
     [DbContext(typeof(MouseDbContext))]
-    [Migration("20241108231415_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241109210152_SecondMigration")]
+    partial class SecondMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
