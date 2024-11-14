@@ -1,3 +1,5 @@
+using System.Reflection.Metadata;
+
 namespace MouseApi.Models
 {
     // Models/TodoItem.cs
@@ -6,12 +8,28 @@ namespace MouseApi.Models
         public long Id { get; set; }
         public required string Name { get; set; }
         public bool IsComplete { get; set; }
+        public MouseTest MouseTest { get; set; }
+        public MouseFile? MouseFile { get; set; }
     }
 
-    public class MouseDebts
+    public class MouseTest
     {
-        public required MouseItem Debtor { get; set; }
-        public required MouseItem Creditor { get; set; }
-        public decimal Value { get; set;}
+        public long Id { get; set; }
+        public string test { get; set; }
+    }
+
+    public class MouseFile { 
+        public long Id { get; set; }
+        public required string FileName { get; set; }
+        public required string MimeType {  get; set; }
+        public required byte[] Content{ get; set; }
+    }
+
+    public class MouseAloneFile
+    {
+        public long Id { get; set; }
+        public required string FileName { get; set; }
+        public required string MimeType { get; set; }
+        public required byte[] Content { get; set; }
     }
 }

@@ -8,5 +8,6 @@ namespace Data.MouseApiContext
         public MouseDbContext(DbContextOptions<MouseDbContext> options) : base(options) { }
 
         public DbSet<MouseItem> MouseItems { get; set; }
+        public DbSet<MouseAloneFile> MouseAloneFile { get; set; }
     }
 }

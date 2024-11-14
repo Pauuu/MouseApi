@@ -3,6 +3,7 @@ using System;
 using Data.MouseApiContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,35 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MouseApi.Migrations
 {
     [DbContext(typeof(MouseDbContext))]
-    partial class MouseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241114193148_AddMouseFile")]
+    partial class AddMouseFile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
-
-            modelBuilder.Entity("MouseApi.Models.MouseAloneFile", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<byte[]>("Content")
-                        .IsRequired()
-                        .HasColumnType("BLOB");
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("MimeType")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MouseAloneFile");
-                });
 
             modelBuilder.Entity("MouseApi.Models.MouseFile", b =>
                 {
@@ -75,9 +55,6 @@ namespace MouseApi.Migrations
                     b.Property<long?>("MouseFileId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long>("MouseTestId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -86,24 +63,7 @@ namespace MouseApi.Migrations
 
                     b.HasIndex("MouseFileId");
 
-                    b.HasIndex("MouseTestId");
-
                     b.ToTable("MouseItems");
-                });
-
-            modelBuilder.Entity("MouseApi.Models.MouseTest", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("test")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MouseTest");
                 });
 
             modelBuilder.Entity("MouseApi.Models.MouseItem", b =>
@@ -112,15 +72,7 @@ namespace MouseApi.Migrations
                         .WithMany()
                         .HasForeignKey("MouseFileId");
 
-                    b.HasOne("MouseApi.Models.MouseTest", "MouseTest")
-                        .WithMany()
-                        .HasForeignKey("MouseTestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("MouseFile");
-
-                    b.Navigation("MouseTest");
                 });
 #pragma warning restore 612, 618
         }

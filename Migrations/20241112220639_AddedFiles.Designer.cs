@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MouseApi.Migrations
 {
     [DbContext(typeof(MouseDbContext))]
-    [Migration("20241109210152_SecondMigration")]
-    partial class SecondMigration
+    [Migration("20241112220639_AddedFiles")]
+    partial class AddedFiles
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,9 @@ namespace MouseApi.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<byte[]>("File")
+                        .HasColumnType("BLOB");
 
                     b.Property<bool>("IsComplete")
                         .HasColumnType("INTEGER");

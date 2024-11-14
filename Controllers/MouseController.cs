@@ -7,7 +7,7 @@ namespace MouseApi.Controllers;
 
 // Probar con los métodos async. Poner algún sleep para probarlo o algo
 [ApiController]
-[Route("[controller]/[route]")]
+[Route("[controller]/[action]")]
 public class MouseController(MouseDbContext mouseDbContext) : ControllerBase
 {
     // Constructor primario
@@ -16,19 +16,33 @@ public class MouseController(MouseDbContext mouseDbContext) : ControllerBase
     [HttpGet(Name = "GetMouses")]
     public async Task<IEnumerable<MouseItem>> GetMouses()
     {
-        // TODO: revisar qeu hace esto exactamente. Evita un null reference?
+        // TODO: revisar qeu hace esto exactamente, el toListAsync. Evita un null reference?
         return await _MouseDbContext.MouseItems.ToListAsync();
     }
 
-    [HttpPost(Name = "AddMousee")]
-    public async Task<ActionResult<MouseItem>> AddMouse(MouseItem mouseItem)
+    [HttpPost(Name = "AddMouse")]
+    public async Task<ActionResult<MouseItem>> AddMouseAloneFile(string name, IFormFile file)
     {
-        _MouseDbContext.MouseItems.Add(mouseItem);
+        using (var memoryStream = new MemoryStream())
+        {
+            // Copia el contendifo del archivo a un target
+            file.CopyTo(memoryStream);
+
+            // Creamos el objeto MouseFile
+            MouseAloneFile mouseAloneFile = new()
+            {
+                FileName = name,
+                MimeType = file.ContentType,
+                Content = memoryStream.ToArray()
+            };
+
+            // He tenido que crear un nuevo modelo en Data -> MouseApiContext manualmente
+            // Mirar si hay alguna manera para hacelo de manera más automática
+            await _MouseDbContext.MouseAloneFile.AddAsync(mouseAloneFile);
+        }
 
         await _MouseDbContext.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(AddMouse), new { id = mouseItem.Id }, mouseItem);
-
-        // return CreatedAtAction(nameof(GetMouses), new { id = 23 }, null);
+        return CreatedAtAction(nameof(AddMouseAloneFile), new { name }, name);
     }
 }
